@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float speed = 15f;
+    public float speed = 15f;
+    public float horizontalInput;
 
     void Start()
     {
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(1*Time.deltaTime*speed, 0, 0));
+
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * speed * Time.deltaTime*horizontalInput);
     }
 }
