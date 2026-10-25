@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float speed = 5f;
+    float speed = 15f;
 
     void Start()
     {
@@ -12,6 +12,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(1*Time.deltaTime*5, 0, 0));
+        transform.Translate(new Vector3(1*Time.deltaTime*speed, 0, 0));
     }
 }
