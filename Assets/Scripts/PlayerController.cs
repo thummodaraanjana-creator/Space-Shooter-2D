@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool isTripleShotActive = false;
     public GameObject laserPrefab;
+    public GameObject tripleShotPrefab;
     [SerializeField]private float _speed = 15f;
     
 
@@ -55,9 +57,16 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerShoot()
     {
-        Instantiate(laserPrefab,
-               transform.position + new Vector3(0, 1, 0),
-               Quaternion.identity);
+        if (isTripleShotActive == true)
+        {
+            //spawn triple shot
+            Instantiate(tripleShotPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+         }
+        else
+        {
+            //spawn single shot
+            Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        } 
     } //player shoot
 }//class
     
