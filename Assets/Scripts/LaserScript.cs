@@ -18,7 +18,7 @@ public class Laser : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D target)
     {
-        Destroy(gameObject);
+       Destroy(gameObject);
         Destroy(target.gameObject);
     }
 }

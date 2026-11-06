@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -68,5 +71,11 @@ public class PlayerController : MonoBehaviour
             Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         } 
     } //player shoot
+
+    public IEnumerator TripleShotPowerupRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+        isTripleShotActive = false;
+    }
 }//class
     
