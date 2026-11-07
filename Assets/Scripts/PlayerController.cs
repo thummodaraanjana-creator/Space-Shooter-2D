@@ -6,14 +6,21 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public bool isTripleShotActive = false;
+    public bool hasSpeedBoostActive = false;
+    public bool hasShieldActive = false;
     public GameObject laserPrefab;
     public GameObject tripleShotPrefab;
+    public GameObject shieldVisualizer;
     [SerializeField]private float _speed = 15f;
+
     
+    public int _life = 3;
+
 
     private void Start()
     {
-
+        hasShieldActive = false;
+        shieldVisualizer.SetActive(false);
     }//start
 
     // Update is called once per frame
@@ -32,10 +39,23 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovement()
     {
-       float horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * _speed * Time.deltaTime * horizontalInput);
-        float verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.up * _speed * Time.deltaTime * verticalInput);
+        //player powerup movement
+        if (hasSpeedBoostActive == true)
+        {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right *5* _speed * Time.deltaTime * horizontalInput);
+            float verticalInput = Input.GetAxis("Vertical");
+            transform.Translate(Vector3.up *5* _speed * Time.deltaTime * verticalInput);
+        }
+        //player normal movement
+        else
+        {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * _speed * Time.deltaTime * horizontalInput);
+            float verticalInput = Input.GetAxis("Vertical");
+            transform.Translate(Vector3.up * _speed * Time.deltaTime * verticalInput);
+        }
+       
     }//player movement
 
     private void PlayerBounds()
@@ -58,6 +78,21 @@ public class PlayerController : MonoBehaviour
         }
     }//player bounds
 
+    public void Damage()
+    {
+        if(hasShieldActive == true)
+        {
+            hasShieldActive = false;
+            shieldVisualizer.SetActive(false);
+            return;
+        }
+        _life--;
+        if (_life == 0)
+        {
+            Destroy(gameObject);
+        }
+    }//Damage
+
     private void PlayerShoot()
     {
         if (isTripleShotActive == true)
@@ -72,10 +107,26 @@ public class PlayerController : MonoBehaviour
         } 
     } //player shoot
 
+    
     public IEnumerator TripleShotPowerupRoutine()
     {
+        isTripleShotActive = true;
         yield return new WaitForSeconds(5f);
         isTripleShotActive = false;
-    }
+    }//powerup coroutine for triple shot
+
+    public IEnumerator SpeedBoostPowerupRoutine()
+    {
+        hasSpeedBoostActive = true;
+        yield return new WaitForSeconds(5f);
+        hasSpeedBoostActive = false;
+    }//powerup coroutine for speed boost
+
+    public void EnableShield()
+    {
+        hasShieldActive = true;
+        shieldVisualizer.SetActive(true);
+
+    }//isSheildActive
 }//class
     

@@ -21,5 +21,25 @@ public class EnemyScript : MonoBehaviour
             transform.position = new Vector3(randomX, 8f, 0);
 
         }
-    }
+    }//update
+
+    private void OnTriggerEnter2D(Collider2D target)
+    {
+        if (target.gameObject.tag == "Player")
+        {
+            PlayerController player = target.GetComponent<PlayerController>();
+            if(player != null)
+            {
+                player.Damage(); 
+            }
+
+        }
+        else if (target.gameObject.tag == "Laser")
+        {
+            Destroy(target.gameObject);
+            Destroy(gameObject);
+
+        }
+        Destroy(gameObject);
+    }//destroy enemy on collision with player or laser
 }
