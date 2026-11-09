@@ -3,6 +3,8 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     private float _speed = 4f;
+    [SerializeField]
+    private GameObject _enemyExplosionPrefab;
     private void Start()
     {
         
@@ -31,6 +33,7 @@ public class EnemyScript : MonoBehaviour
             if(player != null)
             {
                 player.Damage(); 
+                Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
             }
 
         }
@@ -38,6 +41,7 @@ public class EnemyScript : MonoBehaviour
         {
             Destroy(target.gameObject);
             Destroy(gameObject);
+            Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
 
         }
         Destroy(gameObject);

@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
     public GameObject shieldVisualizer;
     [SerializeField]private float _speed = 15f;
 
-    
+    [SerializeField]
+    private GameObject _playerExplosionPrefab;
+
+
     public int _life = 3;
 
 
@@ -89,6 +92,7 @@ public class PlayerController : MonoBehaviour
         _life--;
         if (_life == 0)
         {
+            Instantiate(_playerExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }//Damage
