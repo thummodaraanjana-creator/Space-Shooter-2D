@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UIManager : MonoBehaviour
 {
     public Image LivesDisplay;
@@ -24,5 +25,7 @@ public class UIManager : MonoBehaviour
         _score += 10;
         ScoreText.text = "Score: " + _score;
     }
+
+    
 
 }//class

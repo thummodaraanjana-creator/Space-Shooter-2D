@@ -18,12 +18,15 @@ public class PlayerController : MonoBehaviour
 
     private UIManager _uiManager;
 
+    public GameObject _gameOverScreen;
+
 
     public int _life = 3;
 
 
     private void Start()
     {
+        _gameOverScreen.SetActive(false);
         hasShieldActive = false;
         shieldVisualizer.SetActive(false);
 
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour
         if (_life == 0)
         {
             Instantiate(_playerExplosionPrefab, transform.position, Quaternion.identity);
+            _gameOverScreen.SetActive(true);
             Destroy(gameObject);
         }
     }//Damage
