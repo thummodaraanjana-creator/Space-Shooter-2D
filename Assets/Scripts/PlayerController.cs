@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject _playerExplosionPrefab;
 
+    private UIManager _uiManager;
+
 
     public int _life = 3;
 
@@ -24,6 +26,12 @@ public class PlayerController : MonoBehaviour
     {
         hasShieldActive = false;
         shieldVisualizer.SetActive(false);
+
+        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if (_uiManager != null)
+        {
+            _uiManager.UpdateLives(_life);
+        }
     }//start
 
     // Update is called once per frame
@@ -90,6 +98,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         _life--;
+        _uiManager.UpdateLives(_life);
         if (_life == 0)
         {
             Instantiate(_playerExplosionPrefab, transform.position, Quaternion.identity);

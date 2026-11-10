@@ -5,9 +5,11 @@ public class EnemyScript : MonoBehaviour
     private float _speed = 4f;
     [SerializeField]
     private GameObject _enemyExplosionPrefab;
+
+    private UIManager _uiManager;
     private void Start()
     {
-        
+        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     
@@ -41,6 +43,10 @@ public class EnemyScript : MonoBehaviour
         {
             Destroy(target.gameObject);
             Destroy(gameObject);
+            if (_uiManager != null)
+            {
+                _uiManager.UpdateScore();
+            }
             Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
 
         }
