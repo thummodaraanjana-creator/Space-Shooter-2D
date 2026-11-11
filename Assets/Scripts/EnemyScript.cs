@@ -7,12 +7,16 @@ public class EnemyScript : MonoBehaviour
     private GameObject _enemyExplosionPrefab;
 
     private UIManager _uiManager;
+
+    [SerializeField]
+    private AudioClip _explosionSound;
     private void Start()
     {
+        
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-    }
+    }//start
 
-    
+
     void Update()
     {
         //move down at a speed of 4
@@ -50,6 +54,7 @@ public class EnemyScript : MonoBehaviour
             Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
 
         }
+        AudioSource.PlayClipAtPoint(_explosionSound, Camera.main.transform.position, 1f);
         Destroy(gameObject);
     }//destroy enemy on collision with player or laser
 }

@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject _gameOverScreen;
 
+    private AudioSource _audioSource;
+
 
     public int _life = 3;
 
@@ -29,6 +31,9 @@ public class PlayerController : MonoBehaviour
         _gameOverScreen.SetActive(false);
         hasShieldActive = false;
         shieldVisualizer.SetActive(false);
+
+        _audioSource = GetComponent<AudioSource>();
+        
 
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         if (_uiManager != null)
@@ -112,6 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerShoot()
     {
+        _audioSource.Play();
         if (isTripleShotActive == true)
         {
             //spawn triple shot

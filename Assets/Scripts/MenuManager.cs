@@ -36,5 +36,5 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level0");
 
-    }//restart button loads level 0 scene
+    }//restart button loads level 0 scene 
 }//class
